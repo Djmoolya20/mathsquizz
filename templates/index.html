@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathsQuizZ 🎉</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bubbles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- ── SETUP SCREEN ── -->
+  <div id="setup" class="screen active">
+    <div class="card setup-card">
+      <div class="logo-wrap">
+        <span class="logo-icon">🧮</span>
+        <h1 class="logo">Maths<span>QuizZ</span></h1>
+      </div>
+      <p class="tagline">The fun way to flex your brain! 🧠</p>
+
+      <div class="section-label">🎯 Difficulty</div>
+      <div class="pill-group" id="diff-group">
+        <button class="pill active green" data-val="easy">😊 Easy</button>
+        <button class="pill orange" data-val="normal">🔥 Normal</button>
+        <button class="pill red" data-val="hard">💀 Hard</button>
+      </div>
+      <p class="diff-note" id="diff-note">Easy: numbers 1–30 • 20 sec/question</p>
+
+      <div class="section-label">➕ Operation</div>
+      <div class="pill-group" id="op-group">
+        <button class="pill active blue" data-val="+">➕ Add</button>
+        <button class="pill pink" data-val="-">➖ Sub</button>
+        <button class="pill purple" data-val="*">✖️ Mul</button>
+        <button class="pill teal" data-val="/">➗ Div</button>
+        <button class="pill gold" data-val="random">🎲 Mix!</button>
+      </div>
+
+      <div class="section-label">🔢 Questions</div>
+      <div class="num-stepper">
+        <button id="q-minus" class="step-btn">−</button>
+        <span id="q-display">10</span>
+        <button id="q-plus" class="step-btn">+</button>
+      </div>
+
+      <button id="start-btn" class="big-btn bounce">🚀 Let's Go!</button>
+    </div>
+  </div>
+
+  <!-- ── QUIZ SCREEN ── -->
+  <div id="quiz" class="screen">
+    <div class="card quiz-card">
+
+      <!-- Top bar -->
+      <div class="quiz-topbar">
+        <div class="score-chip">⭐ <span id="live-score">0</span></div>
+        <div class="streak-chip" id="streak-chip">🔥 <span id="streak-count">0</span></div>
+        <button id="quit-btn" class="quit-btn">✕ Quit</button>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="q-label" id="q-label">Question 1 of 10</div>
+
+      <!-- Timer ring -->
+      <div class="timer-wrap">
+        <svg class="timer-ring" viewBox="0 0 80 80">
+          <circle class="ring-bg" cx="40" cy="40" r="34"/>
+          <circle class="ring-fg" id="ring-fg" cx="40" cy="40" r="34"/>
+        </svg>
+        <div class="timer-num" id="timer-num">20</div>
+      </div>
+
+      <!-- Question -->
+      <div class="question-box" id="question-box">
+        <span id="question-text">?</span>
+        <span class="eq">=</span>
+        <span class="blank">?</span>
+      </div>
+
+      <!-- Answer input -->
+      <input id="answer-input" type="number" placeholder="Type your answer…" autocomplete="off">
+
+      <!-- Action buttons -->
+      <div class="action-row">
+        <button id="hint-btn" class="hint-btn">💡 Hint</button>
+        <button id="submit-btn" class="big-btn">✔ Submit</button>
+      </div>
+
+      <!-- Hint box -->
+      <div id="hint-box" class="hint-box hidden"></div>
+
+      <!-- Feedback -->
+      <div id="feedback" class="feedback hidden"></div>
+
+    </div>
+  </div>
+
+  <!-- ── QUIT CONFIRM MODAL ── -->
+  <div id="quit-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-emoji">😱</div>
+      <h3>Quit the quiz?</h3>
+      <p>You've answered <strong id="modal-attempted">0</strong> questions so far.</p>
+      <div class="modal-btns">
+        <button id="modal-cancel" class="pill green">Keep Going!</button>
+        <button id="modal-quit"   class="pill red">Yes, Quit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RESULT SCREEN ── -->
+  <div id="result" class="screen">
+    <div class="card result-card">
+      <div class="result-emoji" id="result-emoji">🏆</div>
+      <h2 id="grade-text">AMAZING!</h2>
+      <div class="result-score"><span id="final-score">8</span><span class="of">/ <span id="final-total">10</span></span></div>
+      <div class="pct-bar-wrap">
+        <div class="pct-bar"><div id="pct-fill" class="pct-fill"></div></div>
+        <span id="pct-label">80%</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat-chip">🔥 Best Streak<br><strong id="best-streak">0</strong></div>
+        <div class="stat-chip">⏱ Difficulty<br><strong id="result-diff">—</strong></div>
+      </div>
+
+      <!-- Question review -->
+      <div class="review-wrap">
+        <div class="section-label">📋 Review</div>
+        <div id="review-list" class="review-list"></div>
+      </div>
+
+      <button id="restart-btn" class="big-btn bounce">🔄 Play Again</button>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
